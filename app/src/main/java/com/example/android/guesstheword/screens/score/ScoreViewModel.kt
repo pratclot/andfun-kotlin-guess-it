@@ -20,11 +20,11 @@ class ScoreViewModel(finalScore: Int) : ViewModel() {
         _score.value = finalScore
     }
 
-    private fun onTryAgain() {
+    fun onTryAgain() {
         _eventPlayAgain.value = true
     }
 
     fun onScoreObservingComplete() {
-
+        _eventPlayAgain.value = false
     }
 }

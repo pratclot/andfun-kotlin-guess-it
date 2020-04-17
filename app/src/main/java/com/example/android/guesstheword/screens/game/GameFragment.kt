@@ -55,14 +55,7 @@ class GameFragment : Fragment() {
         Log.i("sddsds", "sdffsdsfdfsd")
         Timber.i("ViewModelProviders.of() called")
         viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
-
-
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-        }
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
+        binding.gameViewModel = viewModel
 
         viewModel.time.observe(this, Observer {
             binding.timerText.text = it
@@ -77,7 +70,9 @@ class GameFragment : Fragment() {
 
         viewModel.eventGameFinished.observe(this, Observer { newState ->
             when (newState) {
-                true -> {gameFinished(); viewModel.onGameFinishComplete()}
+                true -> {
+                    gameFinished(); viewModel.onGameFinishComplete()
+                }
                 false -> Timber.i("game on")
             }
         })
