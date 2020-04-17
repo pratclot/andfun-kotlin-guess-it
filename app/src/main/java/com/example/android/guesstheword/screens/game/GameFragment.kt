@@ -56,16 +56,10 @@ class GameFragment : Fragment() {
         Timber.i("ViewModelProviders.of() called")
         viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
         binding.gameViewModel = viewModel
+        binding.setLifecycleOwner(this)
 
         viewModel.time.observe(this, Observer {
             binding.timerText.text = it
-        })
-
-        viewModel.score.observe(this, Observer { newScore ->
-            binding.scoreText.text = newScore.toString()
-        })
-        viewModel.word.observe(this, Observer { newWord ->
-            binding.wordText.text = newWord
         })
 
         viewModel.eventGameFinished.observe(this, Observer { newState ->
